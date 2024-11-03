@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tag {
+  id            Int         @id @default(autoincrement())
+  key           String
+  value         String
+
+  error         Error       @relation(fields: [errorId], references: [id])
+  errorId       String
+}
+
+model Error {
+  id            String      @id @default(uuid())
+  createdAt     DateTime    @default(now())
+  application   String
+  category      String
+  severity      String
+  userID        String
+  tags          Tag[]
+}
+
+
+
