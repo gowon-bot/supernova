@@ -17,12 +17,13 @@ model Tag {
 }
 
 model Error {
-  id            String      @id @default(uuid())
+  id            String      @id @default(nanoid(7))
   createdAt     DateTime    @default(now())
   application   String
-  category      String
+  kind          String
   severity      String
   userID        String
+  message       String
   tags          Tag[]
 }
 

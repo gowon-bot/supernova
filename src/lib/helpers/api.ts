@@ -7,7 +7,7 @@ export function jsonResponse(data: object) {
 }
 
 export function errorResponse(code: number, message: string) {
-  return new Response(message, {
+  return new Response(JSON.stringify({ message, code }), {
     status: code,
     headers: {
       "content-type": "text/plain",

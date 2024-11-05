@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client/extension";
+import { PrismaClient } from "@prisma/client";
 
 export class DB {
   private static instance: DB;
@@ -8,6 +8,7 @@ export class DB {
     if (!DB.instance) {
       DB.instance = new DB();
     }
+
     return DB.instance;
   }
 
@@ -17,5 +18,9 @@ export class DB {
 
   public async teardown() {
     await this.prisma.$disconnect();
+  }
+
+  public get client() {
+    return this.prisma;
   }
 }
