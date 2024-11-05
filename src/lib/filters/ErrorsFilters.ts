@@ -1,4 +1,6 @@
 export interface ErrorsFilters {
+  offset: number;
+
   userID: StringEquals;
 
   application: StringMatches;

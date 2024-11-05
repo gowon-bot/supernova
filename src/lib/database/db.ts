@@ -2,7 +2,9 @@ import { PrismaClient } from "@prisma/client";
 
 export class DB {
   private static instance: DB;
-  private prisma: PrismaClient = new PrismaClient();
+  private prisma: PrismaClient = new PrismaClient({
+    log: ["query"],
+  });
 
   public static getInstance(): DB {
     if (!DB.instance) {

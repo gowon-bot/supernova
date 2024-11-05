@@ -38,6 +38,25 @@ export abstract class ErrorService {
     return db.client.error.findMany({
       where: filters ? this.parseErrorsFilters(filters) : undefined,
       include: { tags: true },
+      orderBy: { createdAt: "desc" },
+      take: 100,
+      skip: filters?.offset ?? 0,
+    });
+  }
+
+  static async aggregateErrors({
+    filters,
+    aggregateBy,
+  }: {
+    filters?: ErrorsFilters;
+    aggregateBy: Prisma.ErrorScalarFieldEnum;
+  }): Promise<any> {
+    const db = DB.getInstance();
+
+    return db.client.error.groupBy({
+      by: [aggregateBy],
+      where: filters ? this.parseErrorsFilters(filters) : undefined,
+      _count: true,
     });
   }
 
@@ -72,7 +91,7 @@ export abstract class ErrorService {
   ): Prisma.ErrorWhereInput {
     const where: Prisma.ErrorWhereInput = {};
 
-    const stringFields: (keyof ErrorsFilters)[] = [
+    const stringFields: (keyof Omit<ErrorsFilters, "offset">)[] = [
       "userID",
       "application",
       "kind",
