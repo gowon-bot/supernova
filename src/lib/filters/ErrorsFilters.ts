@@ -23,14 +23,16 @@ export interface StringContains {
 
 export type StringMatches = StringEquals | StringContains;
 
-export function isStringEquals(filter: StringMatches): filter is StringEquals {
-  return (filter as StringEquals).equals !== undefined;
+export function isStringEquals(
+  filter: StringMatches | any
+): filter is StringEquals {
+  return (filter as StringEquals)?.equals !== undefined;
 }
 
 export function isStringContains(
-  filter: StringMatches
+  filter: StringMatches | any
 ): filter is StringContains {
-  return (filter as StringContains).contains !== undefined;
+  return (filter as StringContains)?.contains !== undefined;
 }
 
 //
@@ -52,10 +54,14 @@ export interface TagsSomeMatch {
 
 export type TagsMatch = TagsAllMatch | TagsSomeMatch;
 
-export function isTagsAllMatch(filter: TagsMatch): filter is TagsAllMatch {
-  return (filter as TagsAllMatch).all !== undefined;
+export function isTagsAllMatch(
+  filter: TagsMatch | undefined
+): filter is TagsAllMatch {
+  return (filter as TagsAllMatch)?.all !== undefined;
 }
 
-export function isTagsSomeMatch(filter: TagsMatch): filter is TagsSomeMatch {
-  return (filter as TagsSomeMatch).some !== undefined;
+export function isTagsSomeMatch(
+  filter: TagsMatch | undefined
+): filter is TagsSomeMatch {
+  return (filter as TagsSomeMatch)?.some !== undefined;
 }

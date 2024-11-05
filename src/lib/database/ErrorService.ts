@@ -1,4 +1,4 @@
-import { Error, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import {
   ErrorsFilters,
   isStringContains,
@@ -13,11 +13,17 @@ import { ValidationError } from "../helpers/errors";
 import { DB } from "./db";
 import { ErrorInput, errorInputToCreateArgs } from "./ErrorInput";
 
+export type ErrorWithTags = Prisma.ErrorGetPayload<{
+  include: { tags: true };
+}>;
+
+export const PAGE_SIZE = 50;
+
 export abstract class ErrorService {
   /**
    * @throws `ValidationError` if invalid arguments are provided
    */
-  static async createError(args: ErrorInput): Promise<Error> {
+  static async createError(args: ErrorInput): Promise<ErrorWithTags> {
     const db = DB.getInstance();
 
     this.validateError(args);
@@ -32,15 +38,27 @@ export abstract class ErrorService {
     filters,
   }: {
     filters?: ErrorsFilters;
-  }): Promise<Error[]> {
+  }): Promise<ErrorWithTags[]> {
     const db = DB.getInstance();
 
     return db.client.error.findMany({
       where: filters ? this.parseErrorsFilters(filters) : undefined,
       include: { tags: true },
       orderBy: { createdAt: "desc" },
-      take: 100,
+      take: PAGE_SIZE,
       skip: filters?.offset ?? 0,
+    });
+  }
+
+  static async countErrors({
+    filters,
+  }: {
+    filters?: ErrorsFilters;
+  }): Promise<number> {
+    const db = DB.getInstance();
+
+    return db.client.error.count({
+      where: filters ? this.parseErrorsFilters(filters) : undefined,
     });
   }
 
@@ -60,10 +78,13 @@ export abstract class ErrorService {
     });
   }
 
-  static async getError({ id }: { id: string }): Promise<Error | null> {
+  static async getError({ id }: { id: string }): Promise<ErrorWithTags | null> {
     const db = DB.getInstance();
 
-    return db.client.error.findUnique({ where: { id } });
+    return db.client.error.findUnique({
+      where: { id },
+      include: { tags: true },
+    });
   }
 
   /**

@@ -7,6 +7,7 @@ export async function POST(request: Request) {
 
   return jsonResponse({
     errors: await ErrorService.listErrors({ filters }),
+    totalCount: await ErrorService.countErrors({ filters }),
   });
 }
 
