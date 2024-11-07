@@ -45,10 +45,10 @@ export function setToken(token: Token) {
 }
 
 export function getToken(): Token | undefined {
-  // if (typeof window === "undefined") {
-  //   // Return undefined if running on the server
-  //   return undefined;
-  // }
+  if (typeof window === "undefined") {
+    // Return undefined if running on the server
+    return undefined;
+  }
 
   const token = localStorage.getItem("token");
   const userID = localStorage.getItem("userID");
