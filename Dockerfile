@@ -9,7 +9,7 @@ RUN yarn
 # Copy source
 COPY . .
 
-RUN npx prisma migrate
+RUN npx prisma migrate dev
 RUN npx prisma generate
 
 RUN yarn build
