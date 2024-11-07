@@ -5,7 +5,6 @@ WORKDIR /app
 # Install dependencies
 COPY yarn.lock* ./
 RUN yarn
-RUN yarn global add prisma
 
 # Copy source
 COPY . .
