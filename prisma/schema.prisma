@@ -12,7 +12,7 @@ model Tag {
   key           String
   value         String
 
-  error         Error       @relation(fields: [errorId], references: [id])
+  error         Error       @relation(fields: [errorId], references: [id], onDelete: Cascade)
   errorId       String
 }
 
@@ -24,14 +24,13 @@ model Error {
   severity      String
   userID        String
   message       String
+  stack         String
   tags          Tag[]
 }
-
 
 model User {
   id            String      @id @default(cuid())
   username      String
   password      String
 }
-
 

@@ -6,6 +6,7 @@ export interface ErrorInput {
   severity: string;
   userID: string;
   message: string;
+  stack: string;
   tags: TagInput[];
 }
 
@@ -23,6 +24,7 @@ export function errorInputToCreateArgs(
     severity: input.severity,
     userID: input.userID,
     message: input.message,
+    stack: input.stack,
     tags: {
       createMany: {
         data: input.tags.map((tag) => ({

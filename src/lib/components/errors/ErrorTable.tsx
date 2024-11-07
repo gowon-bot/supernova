@@ -76,13 +76,14 @@ export function ErrorTable() {
       </div>
 
       <div className="flex-1 overflow-y-auto">
-        <div className="grid grid-cols-6">
+        <div className="grid grid-cols-7">
           {/* Headers */}
           <TableHeader header={"ID"} noLeftBorder={true} />
           <TableHeader header={"Kind"} />
           <TableHeader header={"Application"} />
           <TableHeader header={"Message"} />
           <TableHeader header={"Severity"} />
+          <TableHeader header={"User ID"} />
           <TableHeader header={"Occurred"} />
 
           {/* Data */}
@@ -106,6 +107,9 @@ export function ErrorTable() {
               </TableCell>
               <TableCell noBottomBorder={idx !== errors.length - 1}>
                 {error.severity}
+              </TableCell>
+              <TableCell noBottomBorder={idx !== errors.length - 1}>
+                {error.userID}
               </TableCell>
               <TableCell noBottomBorder={idx !== errors.length - 1}>
                 {new Date(error.createdAt).toLocaleString()}

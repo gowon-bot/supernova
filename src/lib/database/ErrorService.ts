@@ -118,6 +118,7 @@ export abstract class ErrorService {
       "kind",
       "severity",
       "message",
+      "stack",
     ];
 
     stringFields.forEach((field) => {

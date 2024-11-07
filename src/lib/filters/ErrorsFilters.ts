@@ -7,6 +7,7 @@ export interface ErrorsFilters {
   kind: StringMatches;
   severity: StringMatches;
   message: StringMatches;
+  stack: StringMatches;
   tags: TagsMatch;
 }
 

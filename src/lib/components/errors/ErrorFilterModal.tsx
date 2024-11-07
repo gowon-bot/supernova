@@ -44,6 +44,12 @@ export function ErrorFilterModal({
               filters={filters}
               setFilters={setFilters}
             />
+
+            <FilterInput
+              name="userID"
+              filters={filters}
+              setFilters={setFilters}
+            />
           </div>
         </form>
       </div>

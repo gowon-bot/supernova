@@ -42,6 +42,10 @@ export function ErrorViewModal({
             ))}
           </div>
         </div>
+
+        <p>
+          Stack: <br /> <span className="text-secondary">{error.stack}</span>
+        </p>
       </div>
     </Modal>
   );
