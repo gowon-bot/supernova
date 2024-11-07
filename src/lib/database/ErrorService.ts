@@ -34,6 +34,15 @@ export abstract class ErrorService {
     });
   }
 
+  static async modifyError(id: string, args: ErrorInput): Promise<void> {
+    const db = DB.getInstance();
+
+    await db.client.error.update({
+      where: { id },
+      data: errorInputToCreateArgs(args),
+    });
+  }
+
   static async listErrors({
     filters,
   }: {

@@ -19,6 +19,9 @@ export function ErrorViewModal({
           <span className="text-secondary">{error.application}</span>
         </p>
         <p>
+          User ID: <span className="text-secondary">{error.userID}</span>
+        </p>
+        <p>
           Message: <span className="text-secondary">{error.message}</span>
         </p>
         <p>

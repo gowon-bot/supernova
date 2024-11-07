@@ -24,7 +24,7 @@ export function Modal({
 
   return (
     <div className="absolute top-0 left-0 h-screen w-screen flex">
-      <div className="m-auto w-1/2 h-3/4 bg-background p-4 flex flex-col">
+      <div className="m-auto w-1/2 h-3/4 overflow-scroll bg-background p-4 flex flex-col">
         <div className="grow">{children}</div>
 
         <button type="button" className="ml-auto" onClick={() => onClose()}>

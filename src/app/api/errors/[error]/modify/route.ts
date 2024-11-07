@@ -1,8 +1,8 @@
 import { ErrorService } from "@/lib/database/ErrorService";
 import { errorResponse, jsonResponse } from "@/lib/helpers/api";
 
-export async function GET(
-  _request: Request,
+export async function POST(
+  request: Request,
   { params }: { params: { error: string } }
 ) {
   const { error: id } = await params;
@@ -12,6 +12,7 @@ export async function GET(
   if (!errorInstance) {
     return errorResponse(404, "Error not found");
   } else {
-    return jsonResponse({ error: errorInstance });
+    await ErrorService.modifyError(errorInstance.id, await request.json());
+    return jsonResponse({ message: "Success" });
   }
 }
