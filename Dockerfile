@@ -10,8 +10,8 @@ RUN yarn global add prisma
 # Copy source
 COPY . .
 
-RUN yarn prisma migrate
-RUN yarn prisma generate
+RUN npx prisma migrate
+RUN npx prisma generate
 
 RUN yarn build
 
