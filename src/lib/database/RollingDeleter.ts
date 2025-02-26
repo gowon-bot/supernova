@@ -25,7 +25,7 @@ export abstract class RollingDeleter {
 
     try {
       const result = await db.client.$executeRaw(
-        Prisma.sql`DELETE FROM errors WHERE created_at < NOW() - INTERVAL '${this.DELETE_THRESHOLD}'`
+        Prisma.sql`DELETE FROM "Error" WHERE created_at < NOW() - INTERVAL '${this.DELETE_THRESHOLD}'`
       );
 
       console.log(`Deleted ${result} old errors from the database`);

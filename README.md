@@ -1,4 +1,4 @@
-# Supernova
+<img src="Supernova Banner.png" alt="Supernova" width="500"/>
 
 _Seek its origin / Bring the light of a dying star_
 
